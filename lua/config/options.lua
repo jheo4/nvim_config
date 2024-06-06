@@ -60,3 +60,5 @@ set.rtp:append("~/.fzf")
 
 set.foldmethod = "indent"
 set.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
+
+vim.g.copilot_no_tab_map = true

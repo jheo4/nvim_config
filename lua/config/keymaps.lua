@@ -13,3 +13,6 @@ end
 function imap(shortcut, command)
   map("i", shortcut, command)
 end
+
+vim.keymap.set("i", "<C-]>", "<Plug>(copilot-accept-line)")
+vim.keymap.set("i", "<C-Right>", "<Plug>(copilot-accept-word)")
