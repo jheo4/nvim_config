@@ -1,0 +1,5 @@
+return {
+  {
+    "scrooloose/nerdtree",
+  },
+}
