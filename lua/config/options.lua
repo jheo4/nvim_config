@@ -9,7 +9,7 @@ vim.cmd("colorscheme evening")
 
 -- General settings
 local set = vim.opt
-set.modeline = ture -- enable modeline for each file type
+set.modeline = true -- enable modeline for each file type
 set.encoding = "utf-8"
 set.fileencodings = "ucs-bom,utf-8,cp949,korea,iso-2022-kr"
 set.et = true -- expandtab replace tab with spaces
@@ -36,6 +36,7 @@ set.softtabstop = 2 -- set softtabstop to 2 spaces
 
 set.cursorline = true -- highlight current line
 set.colorcolumn = "120" -- set color column to 120
+vim.opt.textwidth = 120
 vim.cmd("highlight ColorColumn ctermbg=0 guibg=grey")
 
 -- vim.cmd("autocmd BufWinEnter * match Error /\\s\\+$\\|^\\s*\\n\\+\\%$/") -- highlight trailing whitespace
