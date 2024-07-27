@@ -34,6 +34,9 @@ set.tabstop = 2 -- set tabstop to 2 spaces
 set.shiftwidth = 2 -- set shiftwidth to 2 spaces
 set.softtabstop = 2 -- set softtabstop to 2 spaces
 
+-- set separate indent for each file type
+vim.g.python_recommended_style = 1
+
 set.cursorline = true -- highlight current line
 set.colorcolumn = "120" -- set color column to 120
 vim.opt.textwidth = 120
