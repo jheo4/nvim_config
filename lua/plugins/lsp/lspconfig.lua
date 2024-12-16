@@ -2,7 +2,8 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    "saghen/blink.cmp",
+    -- "saghen/blink.cmp",
+    "hrsh7th/cmp-nvim-lsp",
     { "antosha417/nvim-lsp-file-operations", config = true },
   },
   config = function()
@@ -11,8 +12,8 @@ return {
       local hl = "DiagnosticSign" .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
-    -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
-    local capabilities = require("blink.cmp").get_lsp_capabilities()
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+    -- local capabilities = require("blink.cmp").get_lsp_capabilities()
 
     -- import lspconfig plugin
     local lspconfig = require("lspconfig")
