@@ -38,8 +38,8 @@ set.softtabstop = 2 -- set softtabstop to 2 spaces
 vim.g.python_recommended_style = 1
 
 set.cursorline = true -- highlight current line
-set.colorcolumn = "120" -- set color column to 120
-vim.opt.textwidth = 120
+-- set.colorcolumn = "120" -- set color column to 120
+-- vim.opt.textwidth = 120
 vim.cmd("highlight ColorColumn ctermbg=0 guibg=grey")
 
 -- vim.cmd("autocmd BufWinEnter * match Error /\\s\\+$\\|^\\s*\\n\\+\\%$/") -- highlight trailing whitespace
