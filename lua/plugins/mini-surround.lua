@@ -1,6 +1,6 @@
 return {
   {
-    "echasnovski/mini.surround",
+    "nvim-mini/mini.surround",
     config = {
       mappings = {
         add = "sa", -- Add surrounding in Normal and Visual modes
