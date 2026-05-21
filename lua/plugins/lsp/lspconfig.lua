@@ -1,91 +1,44 @@
 return {
   "neovim/nvim-lspconfig",
-  event = { "BufReadPre", "BufNewFile" },
-  dependencies = {
-    -- "saghen/blink.cmp",
-    "hrsh7th/cmp-nvim-lsp",
-    { "antosha417/nvim-lsp-file-operations", config = true },
+  opts = {
+    servers = {
+      -- =======================================================================
+      -- C/C++ Configuration (clangd)
+      -- =======================================================================
+      clangd = {
+        -- 💡 HOW TO HANDLE CUSTOM LIBRARIES/HEADERS WITHIN A PROJECT:
+        -- Do NOT modify this Neovim configuration file. Instead, handle it at
+        -- the project root directory using one of the following methods:
+        --
+        -- Method 1 (Recommended): If using CMake, add this to your CMakeLists.txt:
+        --   set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+        --   This generates 'compile_commands.json' which clangd reads automatically.
+        --
+        -- Method 2: Create a '.clangd' YAML file at your project root:
+        --   CompileFlags:
+        --     Add:
+        --       - "-I./include"
+        --       - "-I./libs/my_custom_lib/include"
+        --
+        -- Method 3: Create a 'compile_flags.txt' file at your project root:
+        --   -I./include
+        --   -I./libs/my_custom_lib/include
+        cmd = {
+          "clangd",
+          "--background-index",
+          "--suggest-missing-includes",
+          "--clang-tidy",
+        },
+      },
+
+      -- =======================================================================
+      -- Python Configuration (jedi_language_server)
+      -- =======================================================================
+      jedi_language_server = {
+        cmd = { "jedi-language-server" },
+        filetypes = { "python" },
+        single_file_support = true,
+      },
+    },
   },
-  config = function()
-    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-    for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-    end
-    local capabilities = require("cmp_nvim_lsp").default_capabilities()
-    -- local capabilities = require("blink.cmp").get_lsp_capabilities()
-
-    -- import lspconfig plugin
-    local lspconfig = require("lspconfig")
-    -- language servers
-    -- C/C++
-    lspconfig.clangd.setup({
-      capabilities = capabilities,
-      cmd = { "clangd", "--background-index", "--suggest-missing-includes", "--clang-tidy" },
-      filetypes = { "c", "cc", "cpp", "objc", "objcpp", "cuda", "proto" },
-      root_dir = lspconfig.util.root_pattern(
-        ".clangd",
-        ".clang-tidy",
-        ".clang-format",
-        "compile_commands.json",
-        "compile_flags.txt",
-        "configure.ac",
-        ".git"
-      ),
-      single_file_support = true,
-    })
-
-    -- Python
-    lspconfig.jedi_language_server.setup({
-      capabilities = capabilities,
-      cmd = { "jedi-language-server" },
-      filetypes = { "python" },
-      single_file_support = true,
-    })
-
-    -- Keymaps
-    local keymap = vim.keymap -- for conciseness
-    vim.api.nvim_create_autocmd("LspAttach", {
-      group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-      callback = function(ev)
-        -- Buffer local mappings.
-        -- See `:help vim.lsp.*` for documentation on any of the below functions
-        local opts = { buffer = ev.buf, silent = true }
-
-        -- set keybinds
-        opts.desc = "Show LSP references"
-        keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
-
-        opts.desc = "Go to declaration"
-        keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
-
-        opts.desc = "Show LSP definitions"
-        keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
-
-        opts.desc = "Show LSP implementations"
-        keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
-
-        opts.desc = "Show LSP type definitions"
-        keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts) -- show lsp type definitions
-
-        opts.desc = "See available code actions"
-        keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
-
-        opts.desc = "Smart rename"
-        keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
-
-        opts.desc = "Show buffer diagnostics"
-        keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
-
-        opts.desc = "Show line diagnostics"
-        keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
-
-        opts.desc = "Show documentation for what is under cursor"
-        keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
-
-        opts.desc = "Restart LSP"
-        keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
-      end,
-    })
-  end,
 }
