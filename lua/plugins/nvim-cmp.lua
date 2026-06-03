@@ -48,7 +48,20 @@ return {
             { name = "nvim_lsp" },
             { name = "luasnip" },
             { name = "buffer" },
-            { name = "cmdline" },
+          },
+        })
+        cmp.setup.cmdline(":", {
+          mapping = cmp.mapping.preset.cmdline(),
+          sources = cmp.config.sources({
+            { name = "path" },
+          }, {
+            { name = "cmdline" }, -- Correctly bound ONLY to the command line
+          }),
+        })
+        cmp.setup.cmdline({ "/", "?" }, {
+          mapping = cmp.mapping.preset.cmdline(),
+          sources = {
+            { name = "buffer" },
           },
         })
       end,

@@ -34,10 +34,25 @@ return {
       -- =======================================================================
       -- Python Configuration (jedi_language_server)
       -- =======================================================================
-      jedi_language_server = {
-        cmd = { "jedi-language-server" },
-        filetypes = { "python" },
-        single_file_support = true,
+      -- jedi_language_server = {
+      --   cmd = { "jedi-language-server" },
+      --   filetypes = { "python" },
+      --   single_file_support = true,
+      -- },
+      -- =======================================================================
+      -- Python Configuration
+      -- =======================================================================
+      basedpyright = {
+        settings = {
+          basedpyright = {
+            analysis = {
+              -- if stict is too strict, it can be with "standard" or "basic"
+              typeCheckingMode = "basic",
+              autoSearchPaths = true,
+              useLibraryCodeForTypes = true,
+            },
+          },
+        },
       },
     },
   },
