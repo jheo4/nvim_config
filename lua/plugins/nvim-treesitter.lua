@@ -11,6 +11,8 @@ return {
           "make",
           "toml",
           "vimdoc",
+          "terraform",
+          "hcl",
         })
       end
     end,

@@ -30,15 +30,6 @@ return {
           "--clang-tidy",
         },
       },
-
-      -- =======================================================================
-      -- Python Configuration (jedi_language_server)
-      -- =======================================================================
-      -- jedi_language_server = {
-      --   cmd = { "jedi-language-server" },
-      --   filetypes = { "python" },
-      --   single_file_support = true,
-      -- },
       -- =======================================================================
       -- Python Configuration
       -- =======================================================================
@@ -50,6 +41,18 @@ return {
               typeCheckingMode = "basic",
               autoSearchPaths = true,
               useLibraryCodeForTypes = true,
+            },
+          },
+        },
+      },
+      -- =======================================================================
+      -- Terraform Configuration
+      -- =======================================================================
+      terraformls = {
+        settings = {
+          terraform = {
+            trace = {
+              server = "verbose",
             },
           },
         },
